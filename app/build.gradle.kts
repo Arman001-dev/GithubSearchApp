@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    kotlin("plugin.serialization") version "2.0.20"
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.google.dagger.hilt)
 }
 
 android {
@@ -63,4 +66,22 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.logging.interceptor)
+
+    //Kotlinx serialization
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.serialization.converter)
+
+    //Hilt
+    implementation(libs.google.dagger.hilt)
+    ksp(libs.google.dagger.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    //Room
+    implementation(libs.room.android)
+    implementation(libs.room.android.ktx)
+    ksp(libs.room.android.compiler)
 }
