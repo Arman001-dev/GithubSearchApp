@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">GithubSearchApp</string>
+
+    <string name="no_data_found">No data found…</string>
+    <string name="find_a_repository">Find a repository…</string>
 </resources>

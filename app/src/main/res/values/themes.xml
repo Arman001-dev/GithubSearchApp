@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.GithubSearchApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.GithubSearchApp" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/github_mark</item>
+        <item name="postSplashScreenTheme">@android:style/Theme.Material.Dialog.NoActionBar</item>
+    </style>
 </resources>

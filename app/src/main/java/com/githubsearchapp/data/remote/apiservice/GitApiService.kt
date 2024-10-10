@@ -8,8 +8,5 @@ import retrofit2.http.Query
 
 interface GitApiService {
     @GET("users/{username}/repos?")
-    suspend fun getUserRepos(
-        @Path("username") username: String,
-        @Query("type") type: String
-    ): Response<List<GitRepoItemDto>>
+    suspend fun getUserRepos(@Path("username") username: String, @Query("type") type: String): Response<List<GitRepoItemDto>>
 }

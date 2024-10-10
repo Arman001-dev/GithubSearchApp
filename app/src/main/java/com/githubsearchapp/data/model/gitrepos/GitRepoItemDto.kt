@@ -103,7 +103,7 @@ data class GitRepoItemDto(
     @SerialName("languages_url")
     val languagesUrl: String?,
     @SerialName("license")
-    val license: String?,
+    val license: GitRepoLicenseDto?,
     @SerialName("merges_url")
     val mergesUrl: String?,
     @SerialName("milestones_url")
@@ -204,6 +204,20 @@ data class OwnerDto(
     val subscriptionsUrl: String?,
     @SerialName("type")
     val type: String?,
+    @SerialName("url")
+    val url: String?
+)
+
+@Serializable
+data class GitRepoLicenseDto(
+    @SerialName("key")
+    val key: String?,
+    @SerialName("name")
+    val name: String?,
+    @SerialName("node_id")
+    val nodeId: String?,
+    @SerialName("spdx_id")
+    val spdxId: String?,
     @SerialName("url")
     val url: String?
 )

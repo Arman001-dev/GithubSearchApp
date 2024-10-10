@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.0"
+coreSplashscreen = "1.0.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -16,9 +17,11 @@ hilt = "2.51.1"
 androidxHilt = "1.2.0"
 roomVersion = "2.6.1"
 ksp = "1.9.0-1.0.13"
+lifecycleRuntimeComposeAndroid = "2.8.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -50,6 +53,7 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 room-android = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 room-android-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
 room-android-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
+androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

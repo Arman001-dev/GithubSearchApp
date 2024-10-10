@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface GitRepository {
 
-    suspend fun getUserRepos(username: String, type: GitRepoTypeEnum): Flow<Resource<List<GitRepoItem>>>
+    suspend fun getUserRepos(username: String, type: GitRepoTypeEnum = GitRepoTypeEnum.PUBLIC): Flow<Resource<List<GitRepoItem>>>
 }
