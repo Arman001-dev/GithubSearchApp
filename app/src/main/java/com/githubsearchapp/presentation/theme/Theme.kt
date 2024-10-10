@@ -13,7 +13,8 @@ private val DarkColorScheme = darkColorScheme(
     onSecondary = color1,
     tertiary = color3,
     error = color9,
-    onError = color1
+    onError = color1,
+    surface = color10
 )
 
 @Composable
