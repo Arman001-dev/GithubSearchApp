@@ -1,6 +1,6 @@
 package com.githubsearchapp.data.remote.apiservice
 
-import com.githubsearchapp.data.model.gitrepos.GitRepoItemDto
+import com.githubsearchapp.data.remote.model.gitrepos.GitRepoItemDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

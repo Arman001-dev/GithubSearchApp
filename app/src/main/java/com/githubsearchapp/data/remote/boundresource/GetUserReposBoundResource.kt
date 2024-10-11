@@ -2,9 +2,9 @@ package com.githubsearchapp.data.remote.boundresource
 
 import com.githubsearchapp.common.model.ApiWrapper
 import com.githubsearchapp.common.utils.boundResource.HttpBoundResource
-import com.githubsearchapp.data.model.gitrepos.GitRepoItemDto
-import com.githubsearchapp.data.model.gitrepos.GitRepoTypeEnum
-import com.githubsearchapp.data.model.gitrepos.toGitRepoItem
+import com.githubsearchapp.data.remote.model.gitrepos.GitRepoItemDto
+import com.githubsearchapp.data.remote.model.gitrepos.GitRepoTypeEnum
+import com.githubsearchapp.data.remote.model.gitrepos.toGitRepoItem
 import com.githubsearchapp.data.remote.GitNetworkPort
 import com.githubsearchapp.domain.model.GitRepoItem
 

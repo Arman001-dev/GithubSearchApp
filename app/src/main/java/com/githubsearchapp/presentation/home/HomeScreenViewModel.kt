@@ -1,5 +1,6 @@
 package com.githubsearchapp.presentation.home
 
+import androidx.lifecycle.viewModelScope
 import com.githubsearchapp.common.model.Resource
 import com.githubsearchapp.domain.repository.GitRepository
 import com.githubsearchapp.presentation.base.BaseSideEffectViewModel
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -49,6 +51,26 @@ class HomeScreenViewModel @Inject constructor(private val repository: GitReposit
                     }.invoke(intent.query)
                 } else {
                     updateState(states.value.copy(repoItems = null, error = null, isLoading = null))
+                }
+            }
+
+            is HomeScreenIntent.DownloadRepo -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    repository.downloadGitRepo(intent.username, intent.repo, intent.defaultBranch).collectLatest { response ->
+                        when (response) {
+                            is Resource.Error -> {
+
+                            }
+
+                            is Resource.Loading -> {
+
+                            }
+
+                            is Resource.Success -> {
+
+                            }
+                        }
+                    }
                 }
             }
         }

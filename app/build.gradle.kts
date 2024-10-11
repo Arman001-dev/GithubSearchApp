@@ -88,4 +88,10 @@ dependencies {
     implementation(libs.room.android)
     implementation(libs.room.android.ktx)
     ksp(libs.room.android.compiler)
+
+    //Coil
+    implementation(libs.coil.compose)
+
+    //Browser
+    implementation(libs.androidx.browser)
 }

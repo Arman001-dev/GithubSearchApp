@@ -3,7 +3,7 @@
 
     <style name="Theme.GithubSearchApp" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/background</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/github_mark</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_github_mark_white</item>
         <item name="postSplashScreenTheme">@android:style/Theme.Material.Dialog.NoActionBar</item>
     </style>
 </resources>

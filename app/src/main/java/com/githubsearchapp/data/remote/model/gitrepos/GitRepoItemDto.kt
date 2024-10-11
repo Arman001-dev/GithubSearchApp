@@ -1,4 +1,4 @@
-package com.githubsearchapp.data.model.gitrepos
+package com.githubsearchapp.data.remote.model.gitrepos
 
 
 import com.githubsearchapp.domain.model.GitRepoItem
@@ -231,6 +231,7 @@ fun GitRepoItemDto.toGitRepoItem(): GitRepoItem {
         owner = Owner(
             avatarUrl = owner?.avatarUrl,
             login = owner?.login
-        )
+        ),
+        defaultBranch = defaultBranch
     )
 }

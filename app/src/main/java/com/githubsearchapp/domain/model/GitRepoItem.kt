@@ -8,6 +8,7 @@ data class GitRepoItem(
     val description: String?,
     val svnUrl: String?,
     val owner: Owner?,
+    val defaultBranch:String?
 ) : Serializable
 
 data class Owner(

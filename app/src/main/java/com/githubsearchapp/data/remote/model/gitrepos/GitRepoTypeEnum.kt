@@ -1,4 +1,4 @@
-package com.githubsearchapp.data.model.gitrepos
+package com.githubsearchapp.data.remote.model.gitrepos
 
 enum class GitRepoTypeEnum(val type: String) {
     ALL("all"),
