@@ -11,4 +11,5 @@ sealed class HomeScreenIntent : BaseIntent {
 
     data class DownloadRepo(val gitRepoItem: GitRepoItem) : HomeScreenIntent()
     data class RepoDownloaded(val gitRepoItem: GitRepoItem) : HomeScreenIntent()
+    data class RepoDownloadFailed(val gitRepoItem: GitRepoItem) : HomeScreenIntent()
 }

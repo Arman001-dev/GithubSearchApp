@@ -87,6 +87,15 @@ class HomeScreenViewModel @Inject constructor(private val repository: GitReposit
                 }
                 updateState(states.value.copy(repoItems = newList))
             }
+
+            is HomeScreenIntent.RepoDownloadFailed -> {
+                val index = states.value.repoItems?.indexOfFirst { it.name == intent.gitRepoItem.name }
+                val newList = states.value.repoItems?.toMutableList()?.apply {
+                    removeAt(index ?: return@apply)
+                    add(index, intent.gitRepoItem.copy(downloadId = null))
+                }
+                updateState(states.value.copy(repoItems = newList))
+            }
         }
     }
 }

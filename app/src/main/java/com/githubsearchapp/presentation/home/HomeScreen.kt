@@ -75,14 +75,19 @@ fun HomeScreen(navController: NavController, homeScreenViewModel: HomeScreenView
                 focusManager.clearFocus()
             }
         }) {
-        Row(horizontalArrangement = Arrangement.SpaceBetween) {
-            SearchView(homeScreenViewModel, state.searchQuery)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(), horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Box(modifier = Modifier.weight(1f)) {
+                SearchView(homeScreenViewModel, state.searchQuery)
+            }
             Spacer(modifier = Modifier.width(4.dp))
             Icon(
                 painter = painterResource(id = R.drawable.ic_downloads),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(36.dp)
                     .align(Alignment.CenterVertically)
                     .clickable {
                         navController.navigate(Screens.DownloadedRepositories.route)
@@ -190,7 +195,9 @@ fun GitReposLazyColumn(homeScreenViewModel: HomeScreenViewModel, state: HomeScre
                             onDownloadComplete = {
                                 homeScreenViewModel.addIntent(HomeScreenIntent.RepoDownloaded(item))
                             },
-                            onDownloadFailed = {}
+                            onDownloadFailed = {
+                                homeScreenViewModel.addIntent(HomeScreenIntent.RepoDownloadFailed(item))
+                            }
                         )
                         CircularProgressIndicator(
                             progress = {
@@ -252,11 +259,6 @@ fun MonitorDownloadProgress(
                         onDownloadComplete()
                     }
 
-                    DownloadManager.STATUS_FAILED -> {
-                        progress.intValue = 0
-                        onDownloadFailed()
-                    }
-
                     DownloadManager.STATUS_RUNNING -> {
                         if (totalSize > 0) {
                             val progressPercent = (downloadedSize * 100 / totalSize).toInt()
@@ -264,12 +266,17 @@ fun MonitorDownloadProgress(
                             onProgressUpdate(progressPercent)
                         }
                     }
+
+                    else -> {
+                        progress.intValue = 0
+                        onDownloadFailed()
+                    }
                 }
 
                 cursor.close()
 
                 if (status != DownloadManager.STATUS_SUCCESSFUL && status != DownloadManager.STATUS_FAILED) {
-                    handler.postDelayed(this, 1000)
+                    handler.postDelayed(this, 500)
                 }
             }
         }
