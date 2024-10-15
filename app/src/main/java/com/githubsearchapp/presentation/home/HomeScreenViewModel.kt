@@ -56,7 +56,7 @@ class HomeScreenViewModel @Inject constructor(private val repository: GitReposit
 
             is HomeScreenIntent.DownloadRepo -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    repository.downloadGitRepo(intent.username, intent.repo, intent.defaultBranch).collectLatest { response ->
+                    repository.downloadGitRepo(intent.gitRepoItem).collectLatest { response ->
                         when (response) {
                             is Resource.Error -> {
 
@@ -67,11 +67,25 @@ class HomeScreenViewModel @Inject constructor(private val repository: GitReposit
                             }
 
                             is Resource.Success -> {
-
+                                val index = states.value.repoItems?.indexOfFirst { it.name == intent.gitRepoItem.name }
+                                val newList = states.value.repoItems?.toMutableList()?.apply {
+                                    removeAt(index ?: return@apply)
+                                    add(index, intent.gitRepoItem.copy(downloadId = response.data))
+                                }
+                                updateState(states.value.copy(repoItems = newList))
                             }
                         }
                     }
                 }
+            }
+
+            is HomeScreenIntent.RepoDownloaded -> {
+                val index = states.value.repoItems?.indexOfFirst { it.name == intent.gitRepoItem.name }
+                val newList = states.value.repoItems?.toMutableList()?.apply {
+                    removeAt(index ?: return@apply)
+                    add(index, intent.gitRepoItem.copy(downloadId = null))
+                }
+                updateState(states.value.copy(repoItems = newList))
             }
         }
     }

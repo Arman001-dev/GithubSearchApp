@@ -4,19 +4,20 @@ import com.githubsearchapp.common.model.ApiError
 
 abstract class BaseBoundResource<ResponseType, ResultType> {
 
-    abstract suspend fun fetchFromNetwork(): ResponseType?
-
-    abstract fun fetchFromStorage(): ResultType?
-
-    abstract fun isError(response: ResponseType?, result: ResultType?): ApiError?
-
-    abstract fun processResponse(response: ResponseType?, resultType: ResultType?): ResultType?
-
-    abstract fun processErrorResponse(response: ResponseType?, result: ResultType?)
-
-    abstract fun saveNetworkResult(result: ResultType?)
-
     abstract fun determineFetchPolicy(): FetchPolicy
+
+    open suspend fun fetchFromNetwork(): ResponseType? = null
+
+    open fun fetchFromStorage(): ResultType? = null
+
+    open fun isError(response: ResponseType?, result: ResultType?): ApiError? = null
+
+    open fun processResponse(response: ResponseType?, resultType: ResultType?): ResultType? = null
+
+    open fun processErrorResponse(response: ResponseType?, result: ResultType?) {}
+
+    open fun saveNetworkResult(result: ResultType?) {}
+
 }
 
 

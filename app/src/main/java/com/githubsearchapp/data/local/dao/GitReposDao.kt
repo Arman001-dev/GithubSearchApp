@@ -19,4 +19,7 @@ interface GitReposDao {
 
     @Delete
     fun deleteDownloadedGitRepo(gitRepo: DownloadedGitRepoEntity)
+
+    @Query("DELETE FROM $DOWNLOADED_GIT_REPOS")
+    suspend fun deleteAll()
 }

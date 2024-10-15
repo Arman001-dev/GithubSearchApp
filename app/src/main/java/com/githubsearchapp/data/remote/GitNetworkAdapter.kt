@@ -9,9 +9,9 @@ import com.githubsearchapp.common.model.ApiWrapper
 import com.githubsearchapp.common.utils.Constants
 import com.githubsearchapp.common.utils.Constants.MIMETYPE_ZIP
 import com.githubsearchapp.common.utils.parseResponse
+import com.githubsearchapp.data.remote.apiservice.GitApiService
 import com.githubsearchapp.data.remote.model.gitrepos.GitRepoItemDto
 import com.githubsearchapp.data.remote.model.gitrepos.GitRepoTypeEnum
-import com.githubsearchapp.data.remote.apiservice.GitApiService
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class GitNetworkAdapter @Inject constructor(@ApplicationContext private val cont
         }
     }
 
-    override suspend fun downloadGitRepo(username: String, repo: String, defaultBranch: String): ApiWrapper<Long> {
+    override suspend fun downloadGitRepo(username: String?, repo: String?, defaultBranch: String?): ApiWrapper<Long> {
         val request: DownloadManager.Request = DownloadManager.Request(
             Uri.parse("${Constants.GIT_API_BASE_URL}repos/${username}/${repo}/zipball/${defaultBranch}")
         )
@@ -37,7 +37,7 @@ class GitNetworkAdapter @Inject constructor(@ApplicationContext private val cont
             )
         }
         val manager: DownloadManager =
-            context.getSystemService(DownloadManager::class.java)
+            context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         return try {
             ApiWrapper.Success(manager.enqueue(request))
         } catch (e: Exception) {

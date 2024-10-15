@@ -7,5 +7,5 @@ import kotlinx.serialization.json.JsonObject
 
 interface GitNetworkPort {
     suspend fun getUserRepos(username: String, type: GitRepoTypeEnum): ApiWrapper<List<GitRepoItemDto>>
-    suspend fun downloadGitRepo(username: String, repo: String, defaultBranch: String): ApiWrapper<Long>
+    suspend fun downloadGitRepo(username: String?, repo: String?, defaultBranch: String?): ApiWrapper<Long>
 }

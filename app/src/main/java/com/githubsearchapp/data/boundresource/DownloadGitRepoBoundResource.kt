@@ -1,22 +1,21 @@
-package com.githubsearchapp.data.remote.boundresource
+package com.githubsearchapp.data.boundresource
 
 import com.githubsearchapp.common.model.ApiWrapper
 import com.githubsearchapp.common.utils.boundResource.FetchPolicy
 import com.githubsearchapp.common.utils.boundResource.HttpBoundResource
 import com.githubsearchapp.data.local.dao.GitReposDao
-import com.githubsearchapp.data.local.enitity.DownloadedGitRepoEntity
 import com.githubsearchapp.data.remote.GitNetworkPort
+import com.githubsearchapp.domain.model.GitRepoItem
+import com.githubsearchapp.domain.model.toGitRepoEntity
 
 class DownloadGitRepoBoundResource(
     private val gitNetworkPort: GitNetworkPort,
-    private val username: String,
-    private val repo: String,
-    private val defaultBranch: String,
+    private val gitRepoItem: GitRepoItem,
     private val dao: GitReposDao
 ) : HttpBoundResource<ApiWrapper<Long>, Long>() {
 
     override suspend fun fetchFromNetwork(): ApiWrapper<Long> {
-        return gitNetworkPort.downloadGitRepo(username, repo, defaultBranch)
+        return gitNetworkPort.downloadGitRepo(gitRepoItem.owner?.login, gitRepoItem.name, gitRepoItem.defaultBranch)
     }
 
     override fun processResponse(response: ApiWrapper<Long>?, resultType: Long?): Long? {
@@ -30,6 +29,6 @@ class DownloadGitRepoBoundResource(
 
     override fun saveNetworkResult(result: Long?) {
         super.saveNetworkResult(result)
-        dao.insertDownloadedGitRepo(DownloadedGitRepoEntity(repo, username, defaultBranch))
+        dao.insertDownloadedGitRepo(gitRepoItem.toGitRepoEntity())
     }
 }

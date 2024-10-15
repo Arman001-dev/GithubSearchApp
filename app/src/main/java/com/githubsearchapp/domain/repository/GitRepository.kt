@@ -9,5 +9,9 @@ interface GitRepository {
 
     suspend fun getUserRepos(username: String, type: GitRepoTypeEnum = GitRepoTypeEnum.PUBLIC): Flow<Resource<List<GitRepoItem>>>
 
-    suspend fun downloadGitRepo(username: String, repo: String, defaultBranch: String): Flow<Resource<Long>>
+    suspend fun downloadGitRepo(gitRepoItem: GitRepoItem): Flow<Resource<Long>>
+
+    suspend fun getDownloadedRepositories(): Flow<Resource<List<GitRepoItem>>>
+
+    suspend fun clearAll(): Unit
 }

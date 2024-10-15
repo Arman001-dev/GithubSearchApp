@@ -1,10 +1,11 @@
 package com.githubsearchapp.data.repository
 
 import com.githubsearchapp.common.model.Resource
+import com.githubsearchapp.data.boundresource.DownloadGitRepoBoundResource
+import com.githubsearchapp.data.boundresource.GetDownloadedRepositoriesBoundResource
+import com.githubsearchapp.data.boundresource.GetUserReposBoundResource
 import com.githubsearchapp.data.local.dao.GitReposDao
 import com.githubsearchapp.data.remote.GitNetworkPort
-import com.githubsearchapp.data.remote.boundresource.DownloadGitRepoBoundResource
-import com.githubsearchapp.data.remote.boundresource.GetUserReposBoundResource
 import com.githubsearchapp.data.remote.model.gitrepos.GitRepoTypeEnum
 import com.githubsearchapp.domain.model.GitRepoItem
 import com.githubsearchapp.domain.repository.GitRepository
@@ -17,7 +18,15 @@ class GitRepositoryImpl @Inject constructor(private val gitNetworkPort: GitNetwo
         return GetUserReposBoundResource(gitNetworkPort, username, type).invoke()
     }
 
-    override suspend fun downloadGitRepo(username: String, repo: String, defaultBranch: String): Flow<Resource<Long>> {
-        return DownloadGitRepoBoundResource(gitNetworkPort, username, repo, defaultBranch,dao).invoke()
+    override suspend fun downloadGitRepo(gitRepoItem: GitRepoItem): Flow<Resource<Long>> {
+        return DownloadGitRepoBoundResource(gitNetworkPort, gitRepoItem, dao).invoke()
+    }
+
+    override suspend fun getDownloadedRepositories(): Flow<Resource<List<GitRepoItem>>> {
+        return GetDownloadedRepositoriesBoundResource(dao).invoke()
+    }
+
+    override suspend fun clearAll() {
+        dao.deleteAll()
     }
 }

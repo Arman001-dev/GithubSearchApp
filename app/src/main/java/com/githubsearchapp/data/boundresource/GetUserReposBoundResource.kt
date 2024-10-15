@@ -1,4 +1,4 @@
-package com.githubsearchapp.data.remote.boundresource
+package com.githubsearchapp.data.boundresource
 
 import com.githubsearchapp.common.model.ApiWrapper
 import com.githubsearchapp.common.utils.boundResource.HttpBoundResource
